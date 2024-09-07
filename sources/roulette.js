@@ -445,6 +445,25 @@ $(document).ready(function() {
 	}
 });
 
+$(document).ready(function() {
+	Roulette();
+
+	var $result = $('#result');
+	var $roll = $('#roll');
+	var it;
+
+	R.onStop = function() {
+		$result.removeClass('out').text(R.current || '돌려돌려 돌림판!').show().addClass('play');
+		clearTimeout(it);
+		it = setTimeout(function() {
+			$roll.fadeIn(600, function() {
+				lock(false);
+				$result.hide();
+			});
+		}, 1500);
+	}
+});
+
 function lock(b) {
 	if (b) {
 		$('[contenteditable]').attr('contenteditable', false);
