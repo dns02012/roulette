@@ -445,25 +445,6 @@ $(document).ready(function() {
 	}
 });
 
-$(document).ready(function() {
-	Roulette();
-
-	var $result = $('#result');
-	var $roll = $('#roll');
-	var it;
-
-	R.onStop = function() {
-		$result.removeClass('out').text(R.current || '돌려돌려 돌림판!').show().addClass('play');
-		clearTimeout(it);
-		it = setTimeout(function() {
-			$roll.fadeIn(600, function() {
-				lock(false);
-				$result.hide();
-			});
-		}, 1500);
-	}
-});
-
 function lock(b) {
 	if (b) {
 		$('[contenteditable]').attr('contenteditable', false);
@@ -506,6 +487,22 @@ $(document).on('keydown', 'h1[contenteditable]', function(e) {
 	if (e.key === 'Enter') {
 		e.preventDefault();
 	}
+});
+
+$(document).ready(function(){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const data = urlParams.get('data');
+  data_array = data.split(' ')
+  console.log(data_array)
+
+  for (let x of data_array) {
+    var title = document.getElementsByClassName("item-title")[document.getElementsByClassName("item-title").length - 1]
+    title.innerHTML = x
+    updateData()
+    cleanList()
+    updateData()
+  }
 });
 
 (function() {
